@@ -75,11 +75,11 @@ export default async function scaffolding(options) {
               },
             ],
           }) => {
-            const [, dest] = props.type.split(/ +/);
-            if (!dest) return;
+            const [, dist] = props.type.split(/ +/);
+            if (!dist) return;
 
             return write(
-              template(dest, data, { tags }),
+              path.join(options.dist, template(dist, data, { tags })),
               template(content, data, { tags })
             );
           }
