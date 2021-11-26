@@ -54,3 +54,5 @@ Bla bla..
 }
 ```
 ````
+
+The CLI uses [Prompts](https://www.npmjs.com/package/prompts) for the use of questions
