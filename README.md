@@ -8,16 +8,49 @@ CLI that generates files from markdown documents
 npm i @atomico/scaffold
 ```
 
-## Usage
+## use from package.json#scripts
 
 Add script to package.json
 
 ```json
 {
   "scripts": {
-    "create-component": "scaffold template/component-jsx src"
+    "create-component": "scaff template/component-jsx src"
   }
 }
 ```
 
-### crear el archivo component-jsx.md
+## use from npx
+
+```bash
+scaff template/component-jsx src
+```
+
+## Markdown
+
+The files are created according to the markdown file associated with the CLI, all the code blocks that declare the path will be created only if the document does not exist, example:
+
+````md
+---
+{
+  data: { name: "Upper Cod" },
+  questions: [{ type: "text", name: "name", message: "Component name?" }],
+}
+---
+
+## bla bla..
+
+```js tests/build/<<name|kebabCase>>.js
+const data = {"<<name|kebabCase>>":10};
+const <<name|camelCase>> = 10;
+const <<name|pascalCase>> = 10;
+```
+
+Bla bla..
+
+```css tests/build/<<name|kebabCase>>.css
+:host {
+  display: block;
+}
+```
+````

@@ -46,6 +46,7 @@
     ]
   },
   "bin": {
-    "exports": "./src/cli.cjs"
+    "scaffold": "./src/cli.cjs",
+    "scaff": "./src/cli.cjs"
   }
 }
