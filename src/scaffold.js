@@ -3,21 +3,24 @@ import { setup } from "@uppercod/markdown-inline";
 import prompts from "prompts";
 import path from "path";
 import template from "./template.js";
+import { request } from "@uppercod/request";
+
+const remote = `https://raw.githubusercontent.com/atomicojs/scaffold/master/template/`;
 
 const md = setup((tag, props, ...children) => ({ tag, props, children }));
 
 async function write(dist, content) {
-  const { dir } = path.parse(dist);
-  try {
-    await mkdir(dir, { recursive: true });
-  } finally {
+    const { dir } = path.parse(dist);
     try {
-      await stat(dist);
-    } catch (e) {
-      await writeFile(dist, content);
-      return dist;
+        await mkdir(dir, { recursive: true });
+    } finally {
+        try {
+            await stat(dist);
+        } catch (e) {
+            await writeFile(dist, content);
+            return dist;
+        }
     }
-  }
 }
 
 /**
@@ -26,70 +29,83 @@ async function write(dist, content) {
  * @param {string} options.dist
  */
 export default async function scaffolding(options) {
-  const src = options.src + (options.src.endsWith(".md") ? "" : ".md");
-  const text = await readFile(src, "utf8");
-
-  let tree = md.call(null, [text], []);
-  const [first] = tree;
-  let data = {};
-  let tags = ["<<", ">>"];
-
-  if (first?.props?.meta) {
-    const {
-      children: [
-        {
-          children: [json],
-        },
-      ],
-    } = first;
-
-    const {
-      questions,
-      tags: currentTags,
-      data: currentData,
-    } = Function(`return (${json})`)();
-
-    data = { ...currentData, data };
-
-    if (questions) {
-      data = { ...data, ...(await prompts(questions)) };
+    const src = options.src + (options.src.endsWith(".md") ? "" : ".md");
+    let text;
+    try {
+        text = await readFile(src, "utf8");
+    } catch (e) {
+        try {
+            text = await readFile(new URL(src, import.meta.url), "utf8");
+        } catch (e) {
+            const [url, body] = request(`${remote}${src}`);
+            text = body;
+        }
     }
 
-    if (currentTags) {
-      tags = currentTags;
-    }
+    let tree = md.call(null, [text], []);
+    const [first] = tree;
+    let data = {};
+    let tags = ["<<", ">>"];
 
-    tree = tree.slice(1);
-  }
-
-  const results = (
-    await Promise.all(
-      tree
-        .filter(({ tag }) => tag == "pre")
-        .map(
-          ({
-            props,
+    if (first?.props?.meta) {
+        const {
             children: [
-              {
-                children: [content],
-              },
+                {
+                    children: [json],
+                },
             ],
-          }) => {
-            const [, dist] = props.type.split(/ +/);
-            if (!dist) return;
+        } = first;
 
-            return write(
-              path.join(options.dist, template(dist, data, { tags })),
-              template(content, data, { tags })
-            );
-          }
+        const {
+            questions,
+            tags: currentTags,
+            data: currentData,
+        } = Function(`return (${json})`)();
+
+        data = { ...currentData, data };
+
+        if (questions) {
+            data = { ...data, ...(await prompts(questions)) };
+        }
+
+        if (currentTags) {
+            tags = currentTags;
+        }
+
+        tree = tree.slice(1);
+    }
+
+    const results = (
+        await Promise.all(
+            tree
+                .filter(({ tag }) => tag == "pre")
+                .map(
+                    ({
+                        props,
+                        children: [
+                            {
+                                children: [content],
+                            },
+                        ],
+                    }) => {
+                        const [, dist] = props.type.split(/ +/);
+                        if (!dist) return;
+
+                        return write(
+                            path.join(
+                                options.dist,
+                                template(dist, data, { tags })
+                            ),
+                            template(content, data, { tags })
+                        );
+                    }
+                )
         )
-    )
-  ).filter((dist) => dist);
+    ).filter((dist) => dist);
 
-  console.log(`\nfiles created ${results.length}`);
+    console.log(`\nfiles created ${results.length}`);
 
-  results.forEach((dist) => console.log(`+ ${dist}\n`));
+    results.forEach((dist) => console.log(`+ ${dist}\n`));
 
-  return results;
+    return results;
 }

@@ -1,52 +1,57 @@
 {
-  "name": "@atomico/scaffold",
-  "description": "markdown document-based file generation system",
-  "version": "0.2.0",
-  "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
-  "exports": {
-    ".": "./src/scaffold.js"
-  },
-  "scripts": {
-    "test:clean": "rm -rf tests/build",
-    "test": "npm run test:clean && ava"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/atomicojs/scaffold.git"
-  },
-  "keywords": [
-    "jsx",
-    "web-components",
-    "hooks",
-    "custom-elements",
-    "webcomponent",
-    "react"
-  ],
-  "author": "UpperCod",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/atomicojs/scaffold/issues"
-  },
-  "dependencies": {
-    "@uppercod/markdown-inline": "^0.8.0",
-    "cac": "^6.7.12",
-    "mustache": "^4.2.0",
-    "prompts": "^2.4.2"
-  },
-  "devDependencies": {
-    "ava": "^3.15.0",
-    "fast-glob": "^3.2.7"
-  },
-  "ava": {
-    "files": [
-      "tests/**/*.test.js"
-    ]
-  },
-  "bin": {
-    "scaffold": "./src/cli.js",
-    "scaff": "./src/cli.js"
-  }
+    "name": "@atomico/scaffold",
+    "description": "markdown document-based file generation system",
+    "version": "0.2.0",
+    "type": "module",
+    "publishConfig": {
+        "access": "public"
+    },
+    "exports": {
+        ".": "./src/scaffold.js"
+    },
+    "scripts": {
+        "test:clean": "rm -rf tests/build",
+        "test": "npm run test:clean && ava"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/atomicojs/scaffold.git"
+    },
+    "keywords": [
+        "jsx",
+        "web-components",
+        "hooks",
+        "custom-elements",
+        "webcomponent",
+        "react"
+    ],
+    "author": "UpperCod",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/atomicojs/scaffold/issues"
+    },
+    "dependencies": {
+        "@uppercod/markdown-inline": "^0.8.0",
+        "@uppercod/request": "^1.1.2",
+        "cac": "^6.7.12",
+        "mustache": "^4.2.0",
+        "prompts": "^2.4.2"
+    },
+    "devDependencies": {
+        "ava": "^3.15.0",
+        "fast-glob": "^3.2.7"
+    },
+    "ava": {
+        "files": [
+            "tests/**/*.test.js"
+        ]
+    },
+    "bin": {
+        "scaffold": "./src/cli.js",
+        "scaff": "./src/cli.js"
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "singleQuote": false
+    }
 }

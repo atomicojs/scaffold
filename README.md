@@ -14,9 +14,9 @@ Add script to package.json
 
 ```json
 {
-  "scripts": {
-    "create-component": "scaff template/component-jsx src"
-  }
+    "scripts": {
+        "create-component": "scaff template/component-jsx src"
+    }
 }
 ```
 
@@ -33,8 +33,8 @@ The files are created according to the markdown file associated with the CLI, al
 ````md
 ---
 {
-  data: { name: "Upper Cod" },
-  questions: [{ type: "text", name: "name", message: "Component name?" }],
+    data: { name: "Upper Cod" },
+    questions: [{ type: "text", name: "name", message: "Component name?" }],
 }
 ---
 
@@ -50,7 +50,7 @@ Bla bla..
 
 ```css tests/build/<<name|kebabCase>>.css
 :host {
-  display: block;
+    display: block;
 }
 ```
 ````
