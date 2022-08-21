@@ -16,7 +16,6 @@ function {%name|camelCase%}({ color }:Props<typeof {%name|camelCase%}>) {
       <h1>Component {%name%}</h1>
       <h1>color: {color}</h1>
       <slot/>
-
     </host>
   );
 }
