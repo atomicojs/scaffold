@@ -3,9 +3,6 @@ import { setup } from "@uppercod/markdown-inline";
 import prompts from "prompts";
 import path from "path";
 import template from "./template.js";
-import { request } from "@uppercod/request";
-
-const remote = `https://raw.githubusercontent.com/atomicojs/scaffold/master/template/`;
 
 const md = setup((tag, props, ...children) => ({ tag, props, children }));
 
@@ -34,12 +31,10 @@ export default async function scaffolding(options) {
     try {
         text = await readFile(src, "utf8");
     } catch (e) {
-        try {
-            text = await readFile(new URL(src, import.meta.url), "utf8");
-        } catch (e) {
-            const [url, body] = request(`${remote}${src}`);
-            text = body;
-        }
+        text = await readFile(
+            new URL("../template/" + src, import.meta.url),
+            "utf8"
+        );
     }
 
     let tree = md.call(null, [text], []);
