@@ -1,7 +1,7 @@
 {
     "name": "@atomico/scaffold",
     "description": "markdown document-based file generation system",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "type": "module",
     "publishConfig": {
         "access": "public"
@@ -32,6 +32,7 @@
     },
     "dependencies": {
         "@uppercod/markdown-inline": "^0.8.0",
+        "axios": "^0.27.2",
         "cac": "^6.7.12",
         "mustache": "^4.2.0",
         "prompts": "^2.4.2"

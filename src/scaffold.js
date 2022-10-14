@@ -3,6 +3,7 @@ import { setup } from "@uppercod/markdown-inline";
 import prompts from "prompts";
 import path from "path";
 import template from "./template.js";
+import {} from "axios";
 
 const md = setup((tag, props, ...children) => ({ tag, props, children }));
 

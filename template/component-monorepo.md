@@ -48,12 +48,8 @@ customElements.define("atomico-{%name|kebabCase%}", {%name|pascalCase%});
     "publishConfig": {
         "access": "public"
     },
-    "dependencies": {
-        "atomico": "latest"
-    },
     "peerDependencies": {
-        "atomico": "latest",
-        "@atomico/react": "latest"
+        "atomico": "*"
     },
     "peerDependenciesMeta": {
         "@atomico/react": {
@@ -61,7 +57,11 @@ customElements.define("atomico-{%name|kebabCase%}", {%name|pascalCase%});
         }
     },
     "scripts": {
-        "component:publish": "exports src/{define,elements}.{ts,tsx} --types --exports --minify --publish --analyzer --main define"
+        "step:types": "tsc",
+        "step:build": "atomico-vite src/**/*.{js,ts,jsx,tsx}",
+        "step:export": "exports lib/**/*.{js,ts} types/**/*.{js,ts} --wrappers",
+        "build": "npm run step:types && step:build && step:exports",
+        "prepublishOnly": "npm run build"
     }
 }
 ```
@@ -78,7 +78,10 @@ tsconfig.json
 ```json {%name|kebabCase%}/tsconfig.json
 {
     "extends": "@atomico/tsconfig/base.json",
-    "include": ["src/**/*"]
+    "include": ["src/**/*"],
+    "compilerOptions": {
+        "outDir": "types"
+    }
 }
 ```
 
