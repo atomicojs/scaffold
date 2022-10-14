@@ -51,6 +51,9 @@ customElements.define("atomico-{%name|kebabCase%}", {%name|pascalCase%});
     "peerDependencies": {
         "atomico": "*"
     },
+    "devDependencies": {
+        "@atomico/tsconfig": "^1.0.0"
+    },
     "peerDependenciesMeta": {
         "@atomico/react": {
             "optional": true
