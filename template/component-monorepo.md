@@ -96,7 +96,7 @@ export default defineConfig({
 
 ## define.stories.tsx
 
-```js {%name|kebabCase%}/src/define.config.js
+```js {%name|kebabCase%}/src/define.stories.tsx
 import { {%name|pascalCase%} } from "./define";
 
 export default {
