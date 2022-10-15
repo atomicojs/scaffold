@@ -54,16 +54,11 @@ customElements.define("atomico-{%name|kebabCase%}", {%name|pascalCase%});
     "devDependencies": {
         "@atomico/tsconfig": "^1.0.0"
     },
-    "peerDependenciesMeta": {
-        "@atomico/react": {
-            "optional": true
-        }
-    },
     "scripts": {
         "step:types": "tsc",
         "step:build": "atomico-vite src/**/*.{js,ts,jsx,tsx}",
-        "step:export": "exports lib/**/*.{js,ts} types/**/*.{js,ts} --wrappers",
-        "build": "npm run step:types && step:build && step:exports",
+        "step:exports": "exports lib/**/*.{js,ts} types/**/*.{js,ts} --wrappers --main define",
+        "build": "npm run step:types && npm run step:build && npm run step:exports",
         "prepublishOnly": "npm run build"
     }
 }
@@ -97,6 +92,18 @@ import { defineConfig } from "vite";
 export default defineConfig({
     plugins: atomico({ cssLiterals: { minify: true, postcss: true } }),
 });
+```
+
+## define.stories.tsx
+
+```js {%name|kebabCase%}/src/define.config.js
+import { {%name|pascalCase%} } from "./define";
+
+export default {
+    title: "{%name|kebabCase%}",
+};
+
+export const Default = () => <{%name|pascalCase%}/>;
 ```
 
 ## Component documentation

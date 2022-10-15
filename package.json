@@ -1,7 +1,7 @@
 {
     "name": "@atomico/scaffold",
     "description": "markdown document-based file generation system",
-    "version": "0.5.2",
+    "version": "0.6.0",
     "type": "module",
     "publishConfig": {
         "access": "public"
