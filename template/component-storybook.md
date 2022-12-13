@@ -63,60 +63,27 @@ describe("{%name|pascalCase%}", () => {
 });
 ```
 
-## Component documentation
-
-````markdown {%name|kebabCase%}/README.mdx
-import { Story } from "@storybook/addon-docs";
-
-## {%name|kebabCase%}
-
-<Story id="components-{%name|kebabCase%}--story"/>
-
-### Properties
-
-| Property | Type   | Description                        |
-| -------- | ------ | ---------------------------------- |
-| myProp   | string | defines the title of the component |
-
-### Slots
-
-| Property   | Type      | Description     |
-| ---------- | --------- | --------------- |
-| Unassigned | ChildNode | General content |
-
-### Example
-
-```html
-<{%name|kebabCase%} my-prop="my value"></{%name|kebabCase%}>
-```
-````
-
 ## Component story
 
 ```jsx {%name|kebabCase%}/{%name|kebabCase%}.stories.tsx
 import { {%name|pascalCase%} } from "./{%name|kebabCase%}";
-import README from "./README.mdx";
+import { define } from "@atomico/storybook";
 
-// More on default export: https://storybook.js.org/docs/web-components/writing-stories/introduction#default-export
+const { args, argTypes } = define(
+    {%name|pascalCase%},
+    { // Optional
+      color: {
+        category: "Colors",
+        description: "Description..."
+      }
+    }
+);
+
 export default {
   title: "components/{%name|kebabCase%}",
-  // More on argTypes: https://storybook.js.org/docs/web-components/api/argtypes
-  argTypes: {
-    color: { control: "color" },
-    width: {
-      control: { type: "text" },
-    },
-  },
-  parameters: {
-    docs: {
-      page: README,
-    },
-  },
+  argTypes,
+  args
 };
 
 export const Story = (props) =><{%name|pascalCase%} {...props}>Content!</{%name|pascalCase%}>;
-
-Story.args = {
-  color: "black",
-};
 ```
