@@ -98,9 +98,21 @@ export default defineConfig({
 
 ```js {%name|kebabCase%}/src/define.stories.tsx
 import { {%name|pascalCase%} } from "./define";
+import { define } from "@atomico/storybook";
+
+const { args, argTypes } = define(
+    {%name|pascalCase%},
+    { // Optional
+      myProp: {
+        description: "Description..."
+      }
+    }
+);
 
 export default {
     title: "{%name|kebabCase%}",
+    argTypes,
+    args,
 };
 
 export const Default = () => <{%name|pascalCase%}/>;
