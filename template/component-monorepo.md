@@ -54,10 +54,10 @@ customElements.define("atomico-{%name|kebabCase%}", {%name|pascalCase%});
     "scripts": {
         "step:types": "tsc",
         "step:build": "library src/**/*",
-        "step:exports": "exports lib/**/* types/**/* --wrappers --main define",
+        "step:exports": "exports lib/**/* types/**/* --wrappers",
         "step:watch:types": "tsc --watch",
         "step:watch:build": "library src/**/*  --watch",
-        "step:watch:exports": "exports lib/**/* types/**/* --wrappers --main define --watch",
+        "step:watch:exports": "exports lib/**/* types/**/* --wrappers --watch",
         "build": "npm run step:types && npm run step:build && npm run step:exports",
         "prepublishOnly": "npm run build"
     }
@@ -77,6 +77,7 @@ tsconfig.json
 {
     "extends": "@atomico/tsconfig/base.json",
     "include": ["src/**/*"],
+    "exclude": ["src/stories"],
     "compilerOptions": {
         "outDir": "types"
     }
