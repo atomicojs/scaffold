@@ -13,7 +13,7 @@ import { c, css } from "atomico";
 function {%name|camelCase%}() {
   return (
     <host shadowDom>
-      <slot></slot>
+      <h1>Hi <slot/></h1>
     </host>
   );
 }
@@ -50,9 +50,6 @@ customElements.define("atomico-{%name|kebabCase%}", {%name|pascalCase%});
     },
     "peerDependencies": {
         "atomico": "*"
-    },
-    "devDependencies": {
-        "@atomico/tsconfig": "^1.0.0"
     },
     "scripts": {
         "step:types": "tsc",
@@ -93,6 +90,29 @@ tsconfig.json
     "extends": "@atomico/tsconfig/base.json",
     "include": ["*.stories.tsx"]
 }
+```
+
+## Component story
+
+```tsx {%name|kebabCase%}/src/stories/index.stories.tsx
+import { {%name|pascalCase%} } from "@atomico/{%name|kebabCase%}";
+import { define } from "@atomico/storybook";
+
+export default {
+  title: "components/{%name|kebabCase%}",
+  ...define(
+    {%name|pascalCase%},
+    { // Optional
+      argTypes: {
+        color: {
+          description: "Description..."
+        }
+      }
+    }
+)
+};
+
+export const Story = (props) =><{%name|pascalCase%} {...props}>Atomico!</{%name|pascalCase%}>;
 ```
 
 ## vite.config.js
