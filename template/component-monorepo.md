@@ -31,7 +31,7 @@ function {%name|camelCase%}() {
 export const {%name|pascalCase%} = c({%name|camelCase%});
 ```
 
-```jsx {%name|kebabCase%}/src/define.tsx
+```jsx {%name|kebabCase%}/src/index.tsx
 import { {%name|pascalCase%} } from "./elements";
 export { {%name|pascalCase%} } from "./elements";
 
@@ -58,6 +58,9 @@ customElements.define("atomico-{%name|kebabCase%}", {%name|pascalCase%});
         "step:types": "tsc",
         "step:build": "library src/**/*",
         "step:exports": "exports lib/**/* types/**/* --wrappers --main define",
+        "step:watch:types": "tsc --watch",
+        "step:watch:build": "library src/**/*  --watch",
+        "step:watch:exports": "exports lib/**/* types/**/* --wrappers --main define --watch",
         "build": "npm run step:types && npm run step:build && npm run step:exports",
         "prepublishOnly": "npm run build"
     }
@@ -83,6 +86,15 @@ tsconfig.json
 }
 ```
 
+## stories tsconfig.json
+
+```json {%name|kebabCase%}/src/stories/tsconfig.json
+{
+    "extends": "@atomico/tsconfig/base.json",
+    "include": ["*.stories.tsx"]
+}
+```
+
 ## vite.config.js
 
 ```js {%name|kebabCase%}/vite.config.js
@@ -92,30 +104,6 @@ import { defineConfig } from "vite";
 export default defineConfig({
     plugins: atomico({ cssLiterals: { minify: true, postcss: true } }),
 });
-```
-
-## define.stories.tsx
-
-```js {%name|kebabCase%}/src/define.stories.tsx
-import { {%name|pascalCase%} } from "./define";
-import { define } from "@atomico/storybook";
-
-const { args, argTypes } = define(
-    {%name|pascalCase%},
-    { // Optional
-      myProp: {
-        description: "Description..."
-      }
-    }
-);
-
-export default {
-    title: "{%name|kebabCase%}",
-    argTypes,
-    args,
-};
-
-export const Default = () => <{%name|pascalCase%}/>;
 ```
 
 ## Component documentation
