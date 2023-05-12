@@ -93,6 +93,18 @@ tsconfig.json
 }
 ```
 
+## types
+
+```md {%name|kebabCase%}/src/types/README.md
+This directory is created to make it easier for chokidar to observe the changes when using `@atomico/exports`, if you can delete this README
+```
+
+## lib
+
+```md {%name|kebabCase%}/src/types/README.md
+This directory is created to make it easier for chokidar to observe the changes when using `@atomico/exports`, if you can delete this README
+```
+
 ## Component story
 
 ```tsx {%name|kebabCase%}/src/stories/index.stories.tsx
