@@ -32,8 +32,8 @@ export const {%name|pascalCase%} = c({%name|camelCase%});
 ```
 
 ```jsx {%name|kebabCase%}/src/index.tsx
-import { {%name|pascalCase%} } from "./elements";
-export { {%name|pascalCase%} } from "./elements";
+import { {%name|pascalCase%} } from "./element";
+export { {%name|pascalCase%} } from "./element";
 
 customElements.define("atomico-{%name|kebabCase%}", {%name|pascalCase%});
 ```
