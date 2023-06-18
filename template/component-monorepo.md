@@ -55,8 +55,7 @@ customElements.define("atomico-{%name|kebabCase%}", {%name|pascalCase%});
         "build:types": "tsc",
         "build:compile": "library src/**/*",
         "build:exports": "exports lib/**/* types/**/* --wrappers",
-        "dev:types": "tsc --watch",
-        "dev:exports": "exports src/**/* types/**/* --watch",
+        "dev:exports": "exports src/**/* --watch",
         "build": "npm run build:types && npm run build:compile && npm run build:exports",
         "prepublishOnly": "npm run build"
     }
